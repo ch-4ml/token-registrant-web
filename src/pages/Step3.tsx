@@ -1,4 +1,3 @@
-import React from 'react';
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import * as S from "./Step";
@@ -27,12 +26,15 @@ const schema = yup.object().shape({
     .required("이메일을 입력해주세요"),
   password: yup
     .string()
-    .matches(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,16}$/, "비밀번호는 영문,숫자,특수문자를 포함한 8~16자리만 가능합니다")
+    .matches(
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,16}$/,
+      "비밀번호는 영문,숫자,특수문자를 포함한 8~16자리만 가능합니다"
+    )
     .required("비밀번호를 입력해주세요"),
   passwordConfirm: yup
     .string()
-    .oneOf([yup.ref('password')], '비밀번호가 일치하지 않습니다')
-    .required("비밀번호 확인을 입력해주세요")
+    .oneOf([yup.ref("password")], "비밀번호가 일치하지 않습니다")
+    .required("비밀번호 확인을 입력해주세요"),
 });
 
 const Step3 = () => {
@@ -48,7 +50,7 @@ const Step3 = () => {
   const onSubmit = (data: FormData) => {
     alert(`회원가입이 완료되었습니다`);
     console.log(data);
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -63,7 +65,10 @@ const Step3 = () => {
           <S.Error>{errors.email?.message}</S.Error>
           <S.InputBox {...register("password")} placeholder="Password" />
           <S.Error>{errors.password?.message}</S.Error>
-          <S.InputBox {...register("passwordConfirm")} placeholder="Confirm Password" />
+          <S.InputBox
+            {...register("passwordConfirm")}
+            placeholder="Confirm Password"
+          />
           <S.Error>{errors.passwordConfirm?.message}</S.Error>
           <S.InputBox type="submit" />
         </S.InputWrapper>

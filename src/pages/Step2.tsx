@@ -1,4 +1,3 @@
-import React from 'react';
 import * as S from "./Step";
 import { useForm } from "react-hook-form";
 
@@ -23,7 +22,7 @@ const Step2 = () => {
   const onSubmit = (data: FormData) => {
     alert(`회원가입이 완료되었습니다`);
     console.log(data);
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -67,7 +66,8 @@ const Step2 = () => {
             {...register("password", {
               required: "비밀번호를 입력해주세요",
               pattern: {
-                value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,16}$/,
+                value:
+                  /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,16}$/,
                 message:
                   "비밀번호는 영문, 숫자, 특수문자를 포함한 8~16자리로 입력해주세요",
               },
@@ -83,8 +83,9 @@ const Step2 = () => {
             })}
             placeholder="Confirm Password"
           />
-          {errors.passwordConfirm &&
-            <S.Error>{errors.passwordConfirm.message}</S.Error>}
+          {errors.passwordConfirm && (
+            <S.Error>{errors.passwordConfirm.message}</S.Error>
+          )}
           <S.InputBox type="submit" />
         </S.InputWrapper>
       </S.Wrapper>
